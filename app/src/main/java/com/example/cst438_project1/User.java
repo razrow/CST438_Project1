@@ -10,23 +10,26 @@ public class User {
     //@PrimaryKey(autoGenerate = true)
     private int userId;
 
-    private String username;
-    private String password;
     private String firstName;
     private String lastName;
+    private String username;
+    private String password;
+
 
     /**
      * Constructor
-     * @param username - String a person's username
-     * @param password - String a password
      * @param firstName - String a person's first name
      * @param lastName - String a person's last name
+     * @param username - String a person's username
+     * @param password - String a password
+
      */
-    public User(String username, String password, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
+    public User(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+
     }
 
     @Override
@@ -47,12 +50,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return "username = " + username + "\n" +
+                "first name = " + firstName + "\n" +
+                "last name = " + lastName + "\n" +
+                "password = " + password;
     }
 
     /**
