@@ -28,4 +28,12 @@ public class UserTest {
         assertNotEquals("Expected and actual should be FALSE for equals", user1, user2);
     }
 
+    @Test
+    public void testGetters() {
+        User user1 = new User(USER_INFO[0], USER_INFO[1], USER_INFO[2], USER_INFO[3]);
+        assertEquals("Expected and actual DON'T match", USER_INFO[0], user1.getFirstName());
+        assertEquals("Expected and actual DON'T match", USER_INFO[0], user1.getLastName());
+        assertEquals("Expected and actual DON'T match", USER_INFO[0], user1.getUsername());
+    }
+
 }
