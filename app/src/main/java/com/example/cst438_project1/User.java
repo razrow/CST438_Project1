@@ -48,6 +48,7 @@ public class User {
         return Objects.hash(username, password, firstName, lastName);
     }
 
+
     @Override
     public String toString() {
         return "username = " + username + "\n" +
@@ -55,6 +56,7 @@ public class User {
                 "last name = " + lastName + "\n" +
                 "password = " + password;
     }
+
 
     /**
      * UserId getter
@@ -127,4 +129,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
 }
