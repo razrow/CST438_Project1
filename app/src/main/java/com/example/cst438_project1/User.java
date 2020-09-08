@@ -41,11 +41,11 @@ public class User {
         return password;
     }
 
-    public String getfName() {
+    public String getFName() {
         return fName;
     }
 
-    public String getlName() {
+    public String getLName() {
         return lName;
     }
 }
