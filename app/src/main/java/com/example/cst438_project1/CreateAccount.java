@@ -1,16 +1,26 @@
 package com.example.cst438_project1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cst438_project1.UserDB;
+import com.example.cst438_project1.UserDAO;
+
+import java.util.List;
+
 public class CreateAccount extends AppCompatActivity {
+
+    //Used for Logcat
+    private static final String TAG = "CREATE-ACCOUNT-ACTIVITY" ;
 
     EditText firstNameEditText;
     EditText lastNameEditText;
@@ -18,6 +28,8 @@ public class CreateAccount extends AppCompatActivity {
     EditText passwordEditText;
     EditText passwordReEntryEditText;
     Button createAccountButton;
+
+    UserDAO userDao;
 
 
     @Override
@@ -33,6 +45,8 @@ public class CreateAccount extends AppCompatActivity {
         passwordReEntryEditText = findViewById(R.id.passwordReEnterEditText);
         createAccountButton = findViewById(R.id.createAccountButton);
 
+        userDao = UserDB.getInstance(CreateAccount.this).userDao();
+
         // Assign what happens when create account button is clicked
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,17 +59,28 @@ public class CreateAccount extends AppCompatActivity {
 
                     showEmptyFieldErrorDialog();
                 } else if (!isValidUsername(usernameEditText.getText().toString())) { // check username to see if valid
-                    // TODO : need to check database to see if username exists
                     showUsernameErrorDialog();
                 } else if (!isValidPassword(passwordEditText.getText().toString())) { // check password to see if it's valid
                     showPasswordErrorDialog();
                 } else {
+                    //User user = userDao.getUsername(usernameEditText.getText().toString());
+                    /*if(user == null) {
+                        Log.i(TAG, "username is availbe");
+                    }*/
                     // checks to see if password matches
+
                     if(passwordEditText.getText().toString().equals(passwordReEntryEditText.getText().toString())) {
-                        showSuccessDialog();
+                        // TODO check to make sure the username is not in the db yet
+                        User newUser = new User(usernameEditText.getText().toString(),
+                                    passwordEditText.getText().toString(),
+                                    firstNameEditText.getText().toString(),
+                                    lastNameEditText.getText().toString());
+                            userDao.insert(newUser);
+                            showSuccessDialog();
+                    } else {
+                        showPasswordErrorDialog();
                     }
                 }
-
             }
         });
     }
@@ -190,7 +215,7 @@ public class CreateAccount extends AppCompatActivity {
         builder.setCancelable(true);
 
         // Inform the user it is incorrect
-        builder.setMessage("Password must match");
+        builder.setMessage("Password must match and have at least 1 number");
 
         // The user can cancel
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
@@ -215,6 +240,31 @@ public class CreateAccount extends AppCompatActivity {
 
         // Inform the user it is incorrect
         builder.setMessage("Field cannot be empty");
+
+        // The user can cancel
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        // Show the alert
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+    /**
+     * This method uses AlertDialog builder to display an error to the user that their password
+     * inputs do not match
+     */
+    private void showDupUsernameError() {
+        // Start building the alert
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateAccount.this);
+        builder.setTitle("Confirm Error");
+        builder.setCancelable(true);
+
+        // Inform the user it is incorrect
+        builder.setMessage("Username Taken");
 
         // The user can cancel
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
