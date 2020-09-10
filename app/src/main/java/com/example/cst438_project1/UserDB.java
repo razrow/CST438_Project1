@@ -19,7 +19,7 @@ public abstract class UserDB extends RoomDatabase {
     public static synchronized UserDB getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(), UserDB.class, "user_db").
-                    fallbackToDestructiveMigration().build();
+                    allowMainThreadQueries().build();
         }
         return instance;
     }
