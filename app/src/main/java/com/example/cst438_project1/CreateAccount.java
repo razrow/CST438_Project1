@@ -47,11 +47,12 @@ public class CreateAccount extends AppCompatActivity {
 
         userDao = UserDB.getInstance(CreateAccount.this).userDao();
 
+
         // Assign what happens when create account button is clicked
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(firstNameEditText.getText().toString().isEmpty() || // check to see if any fields are empty
+                if (firstNameEditText.getText().toString().isEmpty() || // check to see if any fields are empty
                         lastNameEditText.getText().toString().isEmpty() ||
                         usernameEditText.getText().toString().isEmpty() ||
                         passwordEditText.getText().toString().isEmpty() ||
@@ -63,20 +64,29 @@ public class CreateAccount extends AppCompatActivity {
                 } else if (!isValidPassword(passwordEditText.getText().toString())) { // check password to see if it's valid
                     showPasswordErrorDialog();
                 } else {
-                    //User user = userDao.getUsername(usernameEditText.getText().toString());
-                    /*if(user == null) {
-                        Log.i(TAG, "username is availbe");
-                    }*/
+                    String username = usernameEditText.getText().toString();
+                    try {
+                        User user = userDao.getUsername(username);
+                        if (user == null) {
+                            Log.i(TAG, "username is availbe");
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                     // checks to see if password matches
-
-                    if(passwordEditText.getText().toString().equals(passwordReEntryEditText.getText().toString())) {
+                    if (passwordEditText.getText().toString().equals(passwordReEntryEditText.getText().toString())) {
                         // TODO check to make sure the username is not in the db yet
                         User newUser = new User(usernameEditText.getText().toString(),
-                                    passwordEditText.getText().toString(),
-                                    firstNameEditText.getText().toString(),
-                                    lastNameEditText.getText().toString());
+                                passwordEditText.getText().toString(),
+                                firstNameEditText.getText().toString(),
+                                lastNameEditText.getText().toString());
+                        try{
                             userDao.insert(newUser);
                             showSuccessDialog();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
                     } else {
                         showPasswordErrorDialog();
                     }
