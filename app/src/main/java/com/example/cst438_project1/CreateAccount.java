@@ -52,41 +52,36 @@ public class CreateAccount extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (firstNameEditText.getText().toString().isEmpty() || // check to see if any fields are empty
-                        lastNameEditText.getText().toString().isEmpty() ||
-                        usernameEditText.getText().toString().isEmpty() ||
-                        passwordEditText.getText().toString().isEmpty() ||
-                        passwordReEntryEditText.getText().toString().isEmpty()) {
+                String firstName = firstNameEditText.getText().toString();
+                String lastName = lastNameEditText.getText().toString();
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String passwordReEntry = passwordReEntryEditText.getText().toString();
+
+                if (firstName.isEmpty() || // check to see if any fields are empty
+                        lastName.isEmpty() ||
+                        username.isEmpty() ||
+                        password.isEmpty() ||
+                        passwordReEntry.isEmpty()) {
 
                     showEmptyFieldErrorDialog();
-                } else if (!isValidUsername(usernameEditText.getText().toString())) { // check username to see if valid
+                } else if (!isValidUsername(username)) { // check username to see if valid
                     showUsernameErrorDialog();
-                } else if (!isValidPassword(passwordEditText.getText().toString())) { // check password to see if it's valid
+                } else if (!isValidPassword(password)) { // check password to see if it's valid
                     showPasswordErrorDialog();
                 } else {
-                    String username = usernameEditText.getText().toString();
-                    try {
-                        User user = userDao.getUsername(username);
-                        if (user == null) {
-                            Log.i(TAG, "username is availbe");
-                        }
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
+
                     // checks to see if password matches
-                    if (passwordEditText.getText().toString().equals(passwordReEntryEditText.getText().toString())) {
-                        // TODO check to make sure the username is not in the db yet
-                        User newUser = new User(usernameEditText.getText().toString(),
-                                passwordEditText.getText().toString(),
-                                firstNameEditText.getText().toString(),
-                                lastNameEditText.getText().toString());
-                        try{
+                    if (password.equals(passwordReEntry)) {
+                        // Check to see if user name is in the database
+                        User user = userDao.getUsername(username);
+                        if(user == null) {
+                            User newUser = new User(username, password, firstName, lastName);
                             userDao.insert(newUser);
                             showSuccessDialog();
-                        }catch (Exception e){
-                            e.printStackTrace();
+                        } else {
+                            showDupUsernameError();
                         }
-
                     } else {
                         showPasswordErrorDialog();
                     }
