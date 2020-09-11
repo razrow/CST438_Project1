@@ -27,7 +27,7 @@ public class UserInstrumentedTest {
 
     public static final String UPDATED_USERNAME = "MustasheBob";
     public static final String UPDATED_FIRST_NAME = "Bobby";
-    public static final String UPDATED_LAST_NAME = "Belcher";
+    public static final String UPDATED_LAST_NAME = "Belchery";
     public static final String UPDATED_PASSWORD = "fat123";
     private UserDAO userDao;
     private UserDB db;

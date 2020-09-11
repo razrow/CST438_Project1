@@ -28,5 +28,5 @@ public class LVM extends AndroidViewModel {
     public LiveData<List<User>> getGetAllData() {
         return getAllUsers;
     }
-    
+
 }

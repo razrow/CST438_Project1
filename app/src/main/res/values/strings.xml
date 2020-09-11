@@ -9,4 +9,8 @@
     <string name="passwordReEnterLabel">Re-enter Password</string>
     <string name="accountCreatedMessage">Account Created!</string>
     <string name="createAccountLabel">Create Account</string>
+
+    <!-- Edit User Strings-->
+    <string name="saveLabel">Save</string>
+    <string name="savedMessage">Changes are saved.</string>
 </resources>
