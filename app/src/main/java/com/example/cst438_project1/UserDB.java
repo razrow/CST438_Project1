@@ -12,14 +12,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 @Database(entities = {User.class, Grade.class, Enrollment.class, Course.class, Category.class, Assignment.class}, version = 1 )
 public abstract class UserDB extends RoomDatabase {
 
+    public static final String DB_NAME = "user_db";
     private static UserDB instance;
 
     public abstract UserDAO userDao();
 
-    public static synchronized UserDB getInstance(Context context){
+    public static synchronized UserDB getUserDAO(Context context){
         if(instance == null){
-            instance = Room.databaseBuilder(context.getApplicationContext(), UserDB.class, "user_db").
-                    allowMainThreadQueries().build();
+            instance = Room.databaseBuilder(context.getApplicationContext(), UserDB.class, DB_NAME)
+                    .allowMainThreadQueries()
+                    .build();
         }
         return instance;
     }
