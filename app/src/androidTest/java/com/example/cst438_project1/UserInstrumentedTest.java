@@ -31,6 +31,7 @@ public class UserInstrumentedTest {
     public static final String UPDATED_PASSWORD = "fat123";
     private UserDAO userDao;
     private UserDB db;
+
     @Before
     public void createDb(){
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -42,7 +43,6 @@ public class UserInstrumentedTest {
     }
     @Test
     public void testInsertDb(){
-        //User user = new User("Tina1", "boyz123", "Tina", "Belcher");
         userDao.deleteAllUsers();
         User insertUser = new User(EXPECTED_USERNAME, EXPECTED_PASSWORD, EXPECTED_FIRST_NAME, EXPECTED_LAST_NAME);
         userDao.insert(insertUser);
