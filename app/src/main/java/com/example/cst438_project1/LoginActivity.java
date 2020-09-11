@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.etPassword);
         loginButton = findViewById(R.id.loginButton);
 
-        mUserDAO = UserDB.getInstance(LoginActivity.this).userDao();
+        mUserDAO = UserDB.getUserDAO(LoginActivity.this).userDao();
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
