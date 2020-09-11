@@ -4,7 +4,9 @@ package com.example.cst438_project1;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+import java.util.Objects;
+
+@Entity(tableName = "user_table")
 public class User {
 
     @PrimaryKey(autoGenerate = true)
@@ -47,5 +49,19 @@ public class User {
 
     public String getLName() {
         return lName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return username.equals(user.username) &&
+                password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
     }
 }

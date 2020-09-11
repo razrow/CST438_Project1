@@ -12,10 +12,10 @@ import java.util.List;
 @Dao
 public interface UserDAO {
 
-    @Query("delete from User")
+    @Query("delete from user_table")
     void deleteAllUsers();
 
-    @Query("select * from User")
+    @Query("select * from user_table")
     LiveData<List<User>> getAllUsers();
 
     @Insert
@@ -27,7 +27,21 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM User WHERE username = :username")
+    @Query("SELECT * FROM user_table WHERE username = :username")
     User getUsername(String username);
+
+
+    @Query("UPDATE user_table SET username=:updatedUsername WHERE username=:username")
+    void updateUsername(String username, String updatedUsername);
+
+    @Query("UPDATE user_table SET fName=:updatedFirstName WHERE username=:username")
+    void updateFirstName(String username, String updatedFirstName);
+
+    @Query("UPDATE user_table SET lName=:updatedLastName WHERE username=:username")
+    void updateLastName(String username, String updatedLastName);
+
+    @Query("UPDATE user_table SET password=:updatedPassword WHERE username=:username")
+    void updatePassword(String username, String updatedPassword);
+
 
 }

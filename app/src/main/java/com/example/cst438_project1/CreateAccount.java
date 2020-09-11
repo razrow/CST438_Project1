@@ -45,7 +45,7 @@ public class CreateAccount extends AppCompatActivity {
         passwordReEntryEditText = findViewById(R.id.passwordReEnterEditText);
         createAccountButton = findViewById(R.id.createAccountButton);
 
-        userDao = UserDB.getInstance(CreateAccount.this).userDao();
+        userDao = UserDB.getUserDAO(CreateAccount.this).userDao();
 
 
         // Assign what happens when create account button is clicked
