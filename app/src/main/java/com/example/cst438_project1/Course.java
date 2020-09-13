@@ -1,7 +1,10 @@
 package com.example.cst438_project1;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-@Entity
+
+import java.util.Objects;
+
+@Entity(tableName = "course_table")
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
@@ -51,5 +54,22 @@ public class Course {
 
     public String getEDate() {
         return eDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return instructor.equals(course.instructor) &&
+                title.equals(course.title) &&
+                description.equals(course.description) &&
+                sDate.equals(course.sDate) &&
+                eDate.equals(course.eDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, sDate, eDate);
     }
 }
