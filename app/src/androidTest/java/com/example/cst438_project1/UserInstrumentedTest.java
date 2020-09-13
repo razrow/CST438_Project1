@@ -30,7 +30,8 @@ public class UserInstrumentedTest {
     public static final String UPDATED_LAST_NAME = "Belchery";
     public static final String UPDATED_PASSWORD = "fat123";
     private UserDAO userDao;
-    private UserDB db;
+
+
 
     @Before
     public void createDb(){
@@ -50,6 +51,7 @@ public class UserInstrumentedTest {
 
         assertEquals("Expected insertUser does not match actual", insertUser, testUser);
     }
+
     @Test
     public void testGetUserFromDb(){
         User user = userDao.getUsername(EXPECTED_USERNAME);
@@ -77,6 +79,7 @@ public class UserInstrumentedTest {
         // setting back to original
         userDao.updateLastName(EXPECTED_USERNAME, EXPECTED_FIRST_NAME);
     }
+
     @Test
     public void testSetPassword() {
         userDao.updatePassword(EXPECTED_USERNAME, UPDATED_PASSWORD);

@@ -16,6 +16,7 @@ public abstract class UserDB extends RoomDatabase {
     private static UserDB instance;
 
     public abstract UserDAO userDao();
+    public abstract CourseDAO courseDao();
 
     public static synchronized UserDB getUserDAO(Context context){
         if(instance == null){
@@ -38,14 +39,18 @@ public abstract class UserDB extends RoomDatabase {
     };
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private UserDAO userDao;
+        private CourseDAO courseDao;
 
         private PopulateDbAsyncTask(UserDB db) {
             userDao = db.userDao();
+            courseDao = db.courseDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
+            courseDao.insert(new Course("Jairo", "Capoeira Class",
+                                        "Sexy Dance Fighting", "01/01/01", "03/01/01"));
             return null;
         }
     }
