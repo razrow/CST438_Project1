@@ -12,10 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.cst438_project1.UserDB;
-import com.example.cst438_project1.UserDAO;
-
-import java.util.List;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -30,7 +26,6 @@ public class CreateAccount extends AppCompatActivity {
     Button createAccountButton;
 
     UserDAO userDao;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

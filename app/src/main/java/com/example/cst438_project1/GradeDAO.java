@@ -11,10 +11,10 @@ import java.util.List;
 @Dao
 public interface GradeDAO {
 
-    @Query("delete from Grade")
+    @Query("delete from grade_table")
     void deleteAllGrades();
 
-    @Query("select * from Grade")
+    @Query("select * from grade_table")
     LiveData<List<Grade>> getAllGrades();
 
     @Insert

@@ -20,6 +20,14 @@ public class Course {
 
     private String eDate;
 
+    /**
+     * Full constructor
+     * @param instructor - String - the instructor's name
+     * @param title -  String - the title of the course
+     * @param description - String - a description of the course
+     * @param sDate - String - the start date of the course
+     * @param eDate - String - the end date of the course
+     */
     public Course(String instructor, String title, String description, String sDate, String eDate) {
         this.instructor = instructor;
         this.title = title;
