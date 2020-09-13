@@ -3,7 +3,9 @@ package com.example.cst438_project1;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+import java.util.Objects;
+
+@Entity(tableName = "assignment_table")
 public class Assignment {
 
     @PrimaryKey(autoGenerate = true)
@@ -15,15 +17,15 @@ public class Assignment {
 
     private int earnedScore;
 
-    private String assignedDate;
+    //private String assignedDate;
 
-    private String dueDate;
+    //private String dueDate;
 
-    private int categoryID;
+    //private int categoryID;
 
-    private int courseID;
+    //private int courseID;
 
-    public Assignment(String dets, int maxScore, int earnedScore, String assignedDate, String dueDate, int categoryID, int courseID) {
+    /*public Assignment(String dets, int maxScore, int earnedScore, String assignedDate, String dueDate, int categoryID, int courseID) {
         this.dets = dets;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
@@ -31,6 +33,15 @@ public class Assignment {
         this.dueDate = dueDate;
         this.categoryID = categoryID;
         this.courseID = courseID;
+    }*/
+
+    // I have a feeling we should use this constructor for now since we dont need
+    // all the extra stuff
+    public Assignment(String dets, int maxScore, int earnedScore) {
+        this.dets = dets;
+        this.maxScore = maxScore;
+        this.earnedScore = earnedScore;
+
     }
 
     public void setAssignmentID(int assignmentID) {
@@ -40,6 +51,7 @@ public class Assignment {
     public int getAssignmentID() {
         return assignmentID;
     }
+
 
     public String getDets() {
         return dets;
@@ -53,7 +65,7 @@ public class Assignment {
         return earnedScore;
     }
 
-    public String getAssignedDate() {
+    /*public String getAssignedDate() {
         return assignedDate;
     }
 
@@ -67,5 +79,32 @@ public class Assignment {
 
     public int getCourseID() {
         return courseID;
+    }*/
+
+    public void setDets(String dets) {
+        this.dets = dets;
+    }
+
+    public void setMaxScore(int maxScore) {
+        this.maxScore = maxScore;
+    }
+
+    public void setEarnedScore(int earnedScore) {
+        this.earnedScore = earnedScore;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Assignment that = (Assignment) o;
+        return maxScore == that.maxScore &&
+                earnedScore == that.earnedScore &&
+                dets.equals(that.dets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dets, maxScore, earnedScore);
     }
 }
