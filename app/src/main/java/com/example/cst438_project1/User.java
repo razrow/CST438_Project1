@@ -1,6 +1,5 @@
 package com.example.cst438_project1;
 
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -20,6 +19,13 @@ public class User {
 
     private String lName;
 
+    /**
+     * Full constructor
+     * @param username - String - represents the user's username
+     * @param password - String - represents the user's password
+     * @param fName - String - User's first name
+     * @param lName - String - User's last name
+     */
     public User(String username, String password, String fName, String lName) {
         this.username = username;
         this.password = password;
@@ -29,6 +35,22 @@ public class User {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     public int getUserID() {

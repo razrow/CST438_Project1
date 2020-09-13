@@ -48,13 +48,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //gets the values input by app user for username and password
+    /**
+     * gets the values input by app user for username and password
+     */
     private void getValues(){
         username = mUsername.getText().toString();
         password = mPassword.getText().toString();
     }
 
-    // checks if the database has a user with the username
+    /**
+     * checks if the database has a user with the username
+     * @return true - if user is found within the database
+     */
     private boolean checkForUsername(){
         mUser = mUserDAO.getUsername(username);
         if(mUser == null){
@@ -64,7 +69,10 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    //checks that the passwords match
+    /**
+     * checks that the passwords match
+     * @return ture - if the password matches the user
+     */
     private boolean checkPassword(){
         return mUser.getPassword().equals(password);
     }

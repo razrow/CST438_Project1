@@ -16,7 +16,6 @@ import java.util.List;
 
 public class EditUserActivity extends AppCompatActivity {
 
-
     private LVM editUserViewModel;
 
     UserDAO userDao;

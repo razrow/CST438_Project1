@@ -37,6 +37,13 @@ public class Assignment {
 
     // I have a feeling we should use this constructor for now since we dont need
     // all the extra stuff
+
+    /**
+     * Full constructor
+     * @param dets - String - representing the details of the assignment
+     * @param maxScore - int - the max score you can score on the assignment
+     * @param earnedScore - int - the score earned on the assignment
+     */
     public Assignment(String dets, int maxScore, int earnedScore) {
         this.dets = dets;
         this.maxScore = maxScore;
