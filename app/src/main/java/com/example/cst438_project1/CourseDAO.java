@@ -12,10 +12,10 @@ import java.util.List;
 @Dao
 public interface CourseDAO {
 
-    @Query("delete from Course")
+    @Query("delete from course_table")
     void deleteAllCourses();
 
-    @Query("select * from Course")
+    @Query("select * from course_table")
     LiveData<List<Course>> getAllCourses();
 
     @Insert
@@ -26,5 +26,23 @@ public interface CourseDAO {
 
     @Delete
     void delete(Course course);
+
+    @Query("SELECT * FROM course_table WHERE title =:courseTitle")
+    Course getCourse(String courseTitle);
+
+    @Query("UPDATE course_table SET instructor=:updatedInstructor WHERE instructor=:instructor")
+    void updateInstructor(String instructor, String updatedInstructor);
+
+    @Query("UPDATE course_table SET title =:updatedTitle WHERE instructor=:instructor")
+    void updateTitle(String instructor, String updatedTitle);
+
+    @Query("UPDATE course_table SET description=:updatedDescription WHERE instructor=:instructor")
+    void updateDescription(String instructor, String updatedDescription);
+
+    @Query("UPDATE course_table SET sDate=:updateSDate WHERE instructor=:instructor")
+    void updateSDate(String instructor, String updateSDate);
+
+    @Query("UPDATE course_table SET eDate=:updateEDate WHERE instructor=:instructor")
+    void updateEDate(String instructor, String updateEDate);
 
 }
