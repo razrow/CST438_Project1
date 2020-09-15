@@ -13,4 +13,7 @@
     <!-- Edit User Strings-->
     <string name="saveLabel">Save</string>
     <string name="savedMessage">Changes are saved.</string>
+
+    <!-- Edit Assignment Strings-->
+    <string name="editAssignmentLabel"></string>
 </resources>
