@@ -117,6 +117,7 @@ public class User {
     public void setCourseAssignments() {
         this.courseAssignments = new HashMap<>();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
