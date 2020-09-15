@@ -3,7 +3,11 @@ package com.example.cst438_project1;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
+import com.example.cst438_project1.Course;
+import com.example.cst438_project1.Assignment;
 
 @Entity(tableName = "user_table")
 public class User {
@@ -18,6 +22,12 @@ public class User {
     private String fName;
 
     private String lName;
+
+    private ArrayList<Course> courses = new ArrayList<Course>();
+
+    private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+
+    private HashMap<Course, ArrayList<Assignment>> courseAssignments = new HashMap<Course, ArrayList<Assignment>>();
 
     /**
      * Full constructor
@@ -71,6 +81,30 @@ public class User {
 
     public String getLName() {
         return lName;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(ArrayList<Course> courses) {
+        this.courses = courses;
+    }
+
+    public ArrayList<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(ArrayList<Assignment> assignments) {
+        this.assignments = assignments;
+    }
+
+    public HashMap<Course, ArrayList<Assignment>> getCourseAssignments() {
+        return courseAssignments;
+    }
+
+    public void setCourseAssignments(HashMap<Course, ArrayList<Assignment>> courseAssignments) {
+        this.courseAssignments = courseAssignments;
     }
 
     @Override

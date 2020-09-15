@@ -30,7 +30,6 @@ public interface UserDAO {
     @Query("SELECT * FROM user_table WHERE username = :username")
     User getUsername(String username);
 
-
     @Query("UPDATE user_table SET username=:updatedUsername WHERE username=:username")
     void updateUsername(String username, String updatedUsername);
 

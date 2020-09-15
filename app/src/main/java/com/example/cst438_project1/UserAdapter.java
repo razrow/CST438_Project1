@@ -11,8 +11,43 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
-    private List<User> users = new ArrayList<>();
+public class  UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
+
+    public interface OnLongClickListener{
+        void onItemLongClicked(int position);
+    }
+
+    public interface OnClickListener{
+        void onItemClicked(int position);
+    }
+
+    List<Course> courses;
+    OnLongClickListener longClickListener;
+    OnClickListener clickListener;
+
+    public UserAdapter(List<Course> courses, OnClickListener clickListener){
+        this.courses = courses;
+        this.clickListener = clickListener;
+    }
+
+    @NonNull
+    @Override
+    public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //Use layout inflater to inflate a view
+        View courseView = LayoutInflater.from(parent.getContext())
+                .inflate(android.R.layout.simple_list_item_1, parent, false);
+        //wrap it inside a view holder and return it
+        return new UserHolder(courseView);
+    }
+
+    //binds the data to a particular viewholder
+    @Override
+    public void onBindViewHolder(@NonNull UserHolder holder, int position) {
+        //grab a user at a current position
+        Course currentCourse = courses.get(position);
+        holder.viewTitle.setText(currentCourse.getTitle());
+
+    }
 
     class UserHolder extends RecyclerView.ViewHolder{
         private TextView view;
@@ -27,29 +62,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         }
     }
 
-    @NonNull
-    @Override
-    public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View userView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.user, parent, false);
-        return new UserHolder(userView);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        User currentUser = users.get(position);
-        holder.viewTitle.setText(currentUser.getUsername());
-        holder.view.setText(currentUser.getFName());
-        holder.viewUser.setText(currentUser.getFName());
-    }
-
+    //tells recycler how many items are in the list
     @Override
     public int getItemCount() {
-        return users.size();
+        return courses.size();
     }
 
-    public void setUsers(List<User> users){
-        this.users = users;
+    public void setUsers(List<Course> courses){
+        this.courses = courses;
         notifyDataSetChanged();
     }
 }
