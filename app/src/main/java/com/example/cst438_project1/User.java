@@ -90,6 +90,9 @@ public class User {
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
     }
+    public void setCourses() {
+        this.courses = new ArrayList<Course>();
+    }
 
     public ArrayList<Assignment> getAssignments() {
         return assignments;
@@ -97,6 +100,10 @@ public class User {
 
     public void setAssignments(ArrayList<Assignment> assignments) {
         this.assignments = assignments;
+    }
+
+    public void setAssignments() {
+        this.assignments = new ArrayList<Assignment>();
     }
 
     public HashMap<Course, ArrayList<Assignment>> getCourseAssignments() {
@@ -107,6 +114,9 @@ public class User {
         this.courseAssignments = courseAssignments;
     }
 
+    public void setCourseAssignments() {
+        this.courseAssignments = new HashMap<>();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
