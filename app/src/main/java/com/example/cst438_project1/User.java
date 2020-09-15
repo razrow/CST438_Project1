@@ -23,8 +23,6 @@ public class User {
 
     private String lName;
 
-    private ArrayList<Integer> assignmentsList;
-
     private ArrayList<Course> courses = new ArrayList<Course>();
 
     private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
@@ -118,18 +116,6 @@ public class User {
 
     public void setCourseAssignments() {
         this.courseAssignments = new HashMap<>();
-    }
-
-    public ArrayList<Integer> getAssignmentsList() {
-        return assignmentsList;
-    }
-
-    public void setAssignmentsList(ArrayList<Integer> assignmentsList) {
-        this.assignmentsList = assignmentsList;
-    }
-
-    public void setAssignmentsList() {
-        this.assignmentsList = new ArrayList<Integer>();
     }
 
     @Override
