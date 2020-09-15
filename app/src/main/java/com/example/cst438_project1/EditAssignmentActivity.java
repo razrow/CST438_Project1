@@ -71,7 +71,7 @@ public class EditAssignmentActivity extends AppCompatActivity {
                 assignmentDao.updateDetails(assignmentId, updatedDetails);
                 assignmentDao.updateMaxScore(assignmentId, updatedMaxScore);
                 assignmentDao.updateEarnedScore(assignmentId, updatedEarnedScore);
-                
+
                 showSuccessDialog();
             }
         });
