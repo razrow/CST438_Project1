@@ -23,11 +23,11 @@ public class User {
 
     private String lName;
 
-    private ArrayList<Course> courses = new ArrayList<Course>();
-
-    private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
-
-    private HashMap<Course, ArrayList<Assignment>> courseAssignments = new HashMap<Course, ArrayList<Assignment>>();
+//    private ArrayList<Course> courses = new ArrayList<Course>();
+//
+//    private ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+//
+//    private HashMap<Course, ArrayList<Assignment>> courseAssignments = new HashMap<Course, ArrayList<Assignment>>();
 
     /**
      * Full constructor
@@ -83,40 +83,40 @@ public class User {
         return lName;
     }
 
-    public ArrayList<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
-    }
-    public void setCourses() {
-        this.courses = new ArrayList<Course>();
-    }
-
-    public ArrayList<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(ArrayList<Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
-    public void setAssignments() {
-        this.assignments = new ArrayList<Assignment>();
-    }
-
-    public HashMap<Course, ArrayList<Assignment>> getCourseAssignments() {
-        return courseAssignments;
-    }
-
-    public void setCourseAssignments(HashMap<Course, ArrayList<Assignment>> courseAssignments) {
-        this.courseAssignments = courseAssignments;
-    }
-
-    public void setCourseAssignments() {
-        this.courseAssignments = new HashMap<>();
-    }
+//    public ArrayList<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(ArrayList<Course> courses) {
+//        this.courses = courses;
+//    }
+//    public void setCourses() {
+//        this.courses = new ArrayList<Course>();
+//    }
+//
+//    public ArrayList<Assignment> getAssignments() {
+//        return assignments;
+//    }
+//
+//    public void setAssignments(ArrayList<Assignment> assignments) {
+//        this.assignments = assignments;
+//    }
+//
+//    public void setAssignments() {
+//        this.assignments = new ArrayList<Assignment>();
+//    }
+//
+//    public HashMap<Course, ArrayList<Assignment>> getCourseAssignments() {
+//        return courseAssignments;
+//    }
+//
+//    public void setCourseAssignments(HashMap<Course, ArrayList<Assignment>> courseAssignments) {
+//        this.courseAssignments = courseAssignments;
+//    }
+//
+//    public void setCourseAssignments() {
+//        this.courseAssignments = new HashMap<>();
+//    }
 
     @Override
     public boolean equals(Object o) {

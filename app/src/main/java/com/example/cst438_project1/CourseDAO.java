@@ -16,7 +16,7 @@ public interface CourseDAO {
     void deleteAllCourses();
 
     @Query("select * from course_table")
-    LiveData<List<Course>> getAllCourses();
+    List<Course> getAllCourses();
 
     @Insert
     void insert(Course course);
@@ -32,6 +32,9 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM course_table wHERE dets=:details")
     Course getCourseByDetails(String details);
+
+//    @Query("SELECT * FROM course_table WHERE username =:username")
+//    ArrayList<Course>() getCourseByUsername(String username);
 
     @Query("SELECT * FROM course_table WHERE title =:courseTitle")
     Course getCourse(String courseTitle);

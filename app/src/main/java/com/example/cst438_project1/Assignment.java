@@ -17,6 +17,10 @@ public class Assignment {
 
     private int earnedScore;
 
+    private String username;
+
+    private String course;
+
     //private String assignedDate;
 
     //private String dueDate;
@@ -44,11 +48,12 @@ public class Assignment {
      * @param maxScore - int - the max score you can score on the assignment
      * @param earnedScore - int - the score earned on the assignment
      */
-    public Assignment(String dets, int maxScore, int earnedScore) {
+    public Assignment(String dets, int maxScore, int earnedScore, String username, String course) {
         this.dets = dets;
         this.maxScore = maxScore;
         this.earnedScore = earnedScore;
-
+        this.course = course;
+        this.username = username;
     }
 
     public void setAssignmentID(int assignmentID) {
@@ -71,6 +76,10 @@ public class Assignment {
     public int getEarnedScore() {
         return earnedScore;
     }
+
+    public String getUsername() { return username;}
+
+    public String getCourse(){ return course;}
 
     /*public String getAssignedDate() {
         return assignedDate;

@@ -17,18 +17,23 @@ import java.util.List;
 public class DisplayUser extends AppCompatActivity {
     private LVM userViewModel;
     List<Course> courses;
+    private CourseDAO mCourseDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_user);
 
+        mCourseDAO = UserDB.getUserDAO(DisplayUser.this).courseDao();
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 //        recyclerView.setLayoutManager((new LinearLayoutManager(this)));
 //        recyclerView.setHasFixedSize(true);
-
         //courses = new ArrayLisst<>();
         //courses.add all the courses for the user
+
+        checkForCourses();
+        courses = mCourseDAO.getAllCourses();
 
         UserAdapter.OnClickListener onClickListener = new UserAdapter.OnClickListener(){
             @Override
@@ -50,5 +55,13 @@ public class DisplayUser extends AppCompatActivity {
 //                adapter.setUsers(users);
             }
         });
+    }
+
+    public void checkForCourses(){
+        List<Course> courses = mCourseDAO.getAllCourses();
+        if(courses.size() <= 0){
+            Course course = new Course("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder");
+            mCourseDAO.insert(course);
+        }
     }
 }
