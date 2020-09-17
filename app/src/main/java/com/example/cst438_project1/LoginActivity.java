@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(checkForUsername()){
                     if(checkPassword()){
                         Intent intent = new Intent(getApplicationContext(), CourseDisplay.class);
-                        intent.putExtra(username, username);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(), "Welcome " + username + "!",Toast.LENGTH_SHORT).show();
                     }else{
