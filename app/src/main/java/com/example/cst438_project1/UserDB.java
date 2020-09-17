@@ -56,7 +56,7 @@ public abstract class UserDB extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
-            courseDao.insert(new Course("Jairo", "Capoeira Class",
+            courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
                                         "Sexy Dance Fighting", "01/01/01", "03/01/01"));
             assignmentDao.insert(new Assignment("Read 500 books", 100, 100));
             return null;
