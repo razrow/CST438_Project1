@@ -27,6 +27,12 @@ public interface CourseDAO {
     @Delete
     void delete(Course course);
 
+    @Query("SELECT * FROM course_table WHERE courseID=:id")
+    Course getCourseById(int id);
+
+    @Query("SELECT * FROM course_table wHERE dets=:details")
+    Course getCourseByDetails(String details);
+
     @Query("SELECT * FROM course_table WHERE title =:courseTitle")
     Course getCourse(String courseTitle);
 
@@ -39,10 +45,22 @@ public interface CourseDAO {
     @Query("UPDATE course_table SET description=:updatedDescription WHERE instructor=:instructor")
     void updateDescription(String instructor, String updatedDescription);
 
+    @Query("UPDATE course_table SET instructor=:updatedInstructor WHERE courseID=:courseId")
+    void updateInstructor(int courseId, String updatedInstructor);
+
+    @Query("UPDATE course_table SET title =:updatedTitle WHERE courseID=:courseId")
+    void updateTitle(int courseId, String updatedTitle);
+
+    @Query("UPDATE course_table SET description=:updatedDescription WHERE courseID=:courseId")
+    void updateDescription(int courseId, String updatedDescription);
+
     @Query("UPDATE course_table SET sDate=:updateSDate WHERE instructor=:instructor")
     void updateSDate(String instructor, String updateSDate);
 
     @Query("UPDATE course_table SET eDate=:updateEDate WHERE instructor=:instructor")
     void updateEDate(String instructor, String updateEDate);
+
+    @Query("UPDATE course_table SET dets=:updatedDetails WHERE dets=:details")
+    void updateDetails(int details, String updatedDetails);
 
 }

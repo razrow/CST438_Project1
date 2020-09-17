@@ -19,12 +19,14 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class CourseTest {
 
+    public static final String EXPECTED_DETS = "hello";
     public static final String EXPECTED_INSTRUCTOR = "Phillip Frond";
     public static final String EXPECTED_TITLE = "Psychology";
     public static final String EXPECTED_DESCRIPTION = "I teach with my yarn dolls";
     public static final String EXPECTED_S_DATE = "01/01/01";
     public static final String EXPECTED_E_DATE = "06/06/06";
 
+    public static final String UPDATED_DETS = "bye";
     public static final String UPDATED_INSTRUCTOR = "Frond";
     public static final String UPDATED_TITLE = "GaGa Ball";
     public static final String UPDATED_DESCRIPTION = "Time to a gaga";
@@ -48,7 +50,7 @@ public class CourseTest {
     @Test
     public void testInsertDb() {
         courseDao.deleteAllCourses();
-        Course insertCourse = new Course(EXPECTED_INSTRUCTOR, EXPECTED_TITLE, EXPECTED_DESCRIPTION,
+        Course insertCourse = new Course(EXPECTED_DETS, EXPECTED_INSTRUCTOR, EXPECTED_TITLE, EXPECTED_DESCRIPTION,
                             EXPECTED_S_DATE, EXPECTED_E_DATE);
         courseDao.insert(insertCourse);
         Course testCourse = courseDao.getCourse(EXPECTED_TITLE);
