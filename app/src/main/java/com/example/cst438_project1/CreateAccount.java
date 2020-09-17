@@ -65,18 +65,18 @@ public class CreateAccount extends AppCompatActivity {
                 } else if (!isValidPassword(password)) { // check password to see if it's valid
                     showPasswordErrorDialog();
                 } else {
-
                     // checks to see if password matches
                     if (password.equals(passwordReEntry)) {
                         // Check to see if user name is in the database
                         User user = userDao.getUsername(username);
-                        if(user == null) {
+                        if (user == null) {
                             User newUser = new User(username, password, firstName, lastName);
                             userDao.insert(newUser);
                             showSuccessDialog();
                         } else {
                             showDupUsernameError();
                         }
+
                     } else {
                         showPasswordErrorDialog();
                     }

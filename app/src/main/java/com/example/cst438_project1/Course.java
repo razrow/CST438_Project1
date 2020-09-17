@@ -22,6 +22,8 @@ public class Course {
 
     private String eDate;
 
+    private String username;
+
     /**
      * Full constructor
      * @param instructor - String - the instructor's name
@@ -30,13 +32,14 @@ public class Course {
      * @param sDate - String - the start date of the course
      * @param eDate - String - the end date of the course
      */
-    public Course(String dets, String instructor, String title, String description, String sDate, String eDate) {
+    public Course(String dets, String instructor, String title, String description, String sDate, String eDate, String username) {
         this.instructor = instructor;
         this.title = title;
         this.description = description;
         this.sDate = sDate;
         this.eDate = eDate;
         this.dets = dets;
+        this.username = username;
     }
 
     public void setCourseID(int courseID) {
@@ -70,6 +73,8 @@ public class Course {
     public String getDets(){
         return dets;
     }
+
+    public String getUsername(){return username; }
 
     @Override
     public boolean equals(Object o) {

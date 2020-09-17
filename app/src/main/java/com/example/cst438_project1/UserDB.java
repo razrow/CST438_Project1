@@ -11,16 +11,19 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class, Grade.class, Enrollment.class, Course.class, Category.class, Assignment.class}, version = 2 )
-@TypeConverters(DataTypeConverter.class)
+@Database(entities = {User.class, Grade.class, Enrollment.class, Course.class, Category.class, Assignment.class}, version = 3 )
+//@TypeConverters(DataTypeConverter.class)
 public abstract class UserDB extends RoomDatabase {
 
     public static final String DB_NAME = "user_db";
+    public static final String COURSES_TABLE = "courses_db";
     private static UserDB instance;
 
     public abstract UserDAO userDao();
     public abstract CourseDAO courseDao();
     public abstract AssignmentDAO assignmentDao();
+
+//    public abstract CourseDAO getCourseDAO();
 
     public static synchronized UserDB getUserDAO(Context context){
         if(instance == null){
@@ -31,6 +34,16 @@ public abstract class UserDB extends RoomDatabase {
         }
         return instance;
     }
+
+//    public static synchronized UserDB getCourseDAO(Context context){
+//        if(instance == null){
+//            instance = Room.databaseBuilder(context.getApplicationContext(), UserDB.class, COURSES_TABLE)
+//                    .allowMainThreadQueries()
+//                    .fallbackToDestructiveMigration()       // needs for Junit testing (version increment)
+//                    .build();
+//        }
+//        return instance;
+//    }
 
     /**
      * Populates our database
@@ -57,8 +70,8 @@ public abstract class UserDB extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
             userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
             courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
-                                        "Sexy Dance Fighting", "01/01/01", "03/01/01"));
-            assignmentDao.insert(new Assignment("Read 500 books", 100, 100));
+                                        "Sexy Dance Fighting", "01/01/01", "03/01/01","Tina1"));
+            assignmentDao.insert(new Assignment("Read 500 books", 100, 100,"Tina1","Capoeira Class"));
             return null;
         }
     }
