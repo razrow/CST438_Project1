@@ -35,9 +35,10 @@ public class CourseDisplay extends AppCompatActivity {
         etCourse.setText("Add Course Here");
 
         courses = new ArrayList<>();
-        courses.add("Example Course");
+        courses.add("Example Course 1");
+        courses.add("Example Course 2");
 
-        new CourseAdapter(courses);
+        CourseAdapter courseAdapter = new CourseAdapter(courses);
         rvCourses.setAdapter(courseAdapter);
         rvCourses.setLayoutManager(new LinearLayoutManager(this));
     }
