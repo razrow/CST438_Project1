@@ -25,7 +25,6 @@ public class CourseDisplay extends AppCompatActivity {
 
     List<String> courses = new ArrayList<>();
     Button btnAdd;
-    EditText etCourse;
     RecyclerView rvCourses;
     CourseAdapter courseAdapter;
     String mUsername = "placeholder";
@@ -35,17 +34,12 @@ public class CourseDisplay extends AppCompatActivity {
     CourseDAO mCourseDAO;
     User mUser;
 
-//    public static final String test = "ALL_GOOD";
-
-    String method;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_display);
 
         btnAdd = findViewById(R.id.btnAdd);
-        etCourse = findViewById(R.id.etCourse);
         rvCourses = findViewById(R.id.rvCourses);
         displayUsername = findViewById(R.id.displayUsername);
         editUser = findViewById(R.id.editUser);
