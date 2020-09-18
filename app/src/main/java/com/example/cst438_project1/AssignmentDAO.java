@@ -16,7 +16,7 @@ public interface AssignmentDAO {
     void deleteAllAssignment();
 
     @Query("select * from assignment_table")
-    LiveData<List<Assignment>> getAllAssignments();
+    List<Assignment> getAllAssignments();
 
     @Insert
     void insert(Assignment assignment);

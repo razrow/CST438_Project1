@@ -17,51 +17,57 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDisplay extends AppCompatActivity {
+public class AssignmentDisplayActivity extends AppCompatActivity {
 
     public static final String KEY_COURSE_TEXT = "course_text";
     public static final String KEY_COURSE_POSITION = "course_position";
     public static final int EDIT_TEXT_CODE = 20;
 
-    List<String> courses = new ArrayList<>();
+    List<Double> assignments = new ArrayList<>();
     Button btnAdd;
-    RecyclerView rvCourses;
-    CourseAdapter courseAdapter;
+    RecyclerView rvAssignments;
+    AssignmentAdapter assignmentAdapter;
     String mUsername = "placeholder";
+    String mCourseTitle = "placeholder";
     TextView displayUsername;
     Button editUser;
+    AssignmentDAO mAssignmentDAO;
     UserDAO mUserDAO;
     CourseDAO mCourseDAO;
     User mUser;
+    Course mCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_display);
+        setContentView(R.layout.activity_assignment_display);
 
         btnAdd = findViewById(R.id.btnAdd);
-        rvCourses = findViewById(R.id.rvCourses);
+        rvAssignments = findViewById(R.id.rvAssignments);
         displayUsername = findViewById(R.id.displayUsername);
         editUser = findViewById(R.id.editUser);
 
         Bundle extras = getIntent().getExtras();
         mUsername = extras.getString("username");
+        mCourseTitle = extras.getString("course title");
 
-        mUserDAO = UserDB.getUserDAO(CourseDisplay.this).userDao();
+        mUserDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).userDao();
         mUser = mUserDAO.getUsername(mUsername);
+        mCourseDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).courseDao();
+        mCourse = mCourseDAO.getCourse(mCourseTitle);
 
-        displayUsername.setText("Hello " + " " + mUser.getFName() + "!");
+        displayUsername.setText("Hello " + " " + mUser.getFName() + ", showing assignments for ");
 
-        mCourseDAO = UserDB.getUserDAO(CourseDisplay.this).courseDao();
-        List<Course> dbCourses = mCourseDAO.getAllCourses();
-        if (dbCourses.size() > 0) {
-            for (int i = 0; i < dbCourses.size(); i++) {
-                if (dbCourses.get(i).getUsername() == mUsername) {
-                    courses.add(dbCourses.get(i).getTitle());
+        mAssignmentDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).assignmentDao();
+        List<Assignment> dbAssignments = mAssignmentDAO.getAllAssignments();
+        if (dbAssignments.size() > 0) {
+            for (int i = 0; i < dbAssignments.size(); i++) {
+                if (dbAssignments.get(i).getUsername() == mUsername) {
+                    assignments.add(Double.valueOf(dbAssignments.get(i).getEarnedScore())/Double.valueOf(dbAssignments.get(i).getMaxScore()));
                 }
             }
         }else{
-            courses.add("Example Course 1");
+            assignments.add(Double.valueOf(0));
         }
 
 
@@ -69,35 +75,25 @@ public class CourseDisplay extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AddCourseActivity.class);
+                Intent i = new Intent(getApplicationContext(), AddAssignmentActivity.class);
                 i.putExtra("username", mUsername);
                 startActivityForResult(i, EDIT_TEXT_CODE);
             }
         });
 
-        CourseAdapter.OnClickListener onClickListener = new CourseAdapter.OnClickListener() {
+        AssignmentAdapter.OnClickListener onClickListener = new AssignmentAdapter.OnClickListener() {
             @Override
             public void onItemClicked(int position) {
-                Intent intent = new Intent(CourseDisplay.this, AssignmentDisplayActivity.class);
-                intent.putExtra("course title", courses.get(position));
+                Intent intent = new Intent(AssignmentDisplayActivity.this, EditAssignmentActivity.class);
+                intent.putExtra("assignment score", assignments.get(position));
                 intent.putExtra("username", mUsername);
                 startActivity(intent);
             }
         };
 
-        CourseAdapter.OnLongClickListener onLongClickListener = new CourseAdapter.OnLongClickListener(){
-            @Override
-            public void onItemLongClicked(int position) {
-                Intent intent = new Intent(CourseDisplay.this, CourseEditActivity.class);
-                intent.putExtra("course title", courses.get(position));
-                intent.putExtra("username", mUsername);
-                startActivityForResult(intent,EDIT_TEXT_CODE);
-            }
-        };
-
-        courseAdapter = new CourseAdapter(courses,onLongClickListener, onClickListener);
-        rvCourses.setAdapter(courseAdapter);
-        rvCourses.setLayoutManager(new LinearLayoutManager(this));
+        assignmentAdapter = new AssignmentAdapter(assignments, onClickListener);
+        rvAssignments.setAdapter(assignmentAdapter);
+        rvAssignments.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -106,8 +102,8 @@ public class CourseDisplay extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
             Bundle bundle = data.getExtras();
-            courses.add(bundle.getString(KEY_COURSE_TEXT));
-            courseAdapter.notifyDataSetChanged();
+            assignments.add(bundle.getDouble(KEY_COURSE_TEXT));
+            assignmentAdapter.notifyDataSetChanged();
         } else {
             Log.w("CourseDisplay", "Error updating rv");
         }

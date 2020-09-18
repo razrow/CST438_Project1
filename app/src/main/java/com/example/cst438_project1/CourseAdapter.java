@@ -12,10 +12,22 @@ import java.util.List;
 //this is where we take in data and then display it
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
 
-    List<String> courses;
+    public interface OnLongClickListener{
+        void onItemLongClicked(int position);
+    }
 
-    public CourseAdapter(List<String> courses) {
+    public interface OnClickListener{
+        void onItemClicked(int position);
+    }
+
+    List<String> courses;
+    OnLongClickListener longClickListener;
+    OnClickListener clickListener;
+
+    public CourseAdapter(List<String> courses, OnLongClickListener onLongClickListener, OnClickListener clickListener) {
         this.courses = courses;
+        this.longClickListener = onLongClickListener;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -52,6 +64,21 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         //update view inside of the viewholder with data
         public void bind(String course) {
             tvCourse.setText(course);
+            tvCourse.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClicked(getAdapterPosition());
+                }
+            });
+
+            tvCourse.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    longClickListener.onItemLongClicked(getAdapterPosition());
+                    return false;
+                }
+            });
         }
+
     }
 }
