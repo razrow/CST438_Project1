@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Update;
 import androidx.room.Delete;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -15,7 +16,7 @@ public interface CourseDAO {
     @Query("delete from course_table")
     void deleteAllCourses();
 
-    @Query("select * from course_table")
+    @Query("SELECT * FROM " + UserDB.COURSES_TABLE)
     List<Course> getAllCourses();
 
     @Insert
@@ -29,9 +30,6 @@ public interface CourseDAO {
 
     @Query("SELECT * FROM course_table WHERE courseID=:id")
     Course getCourseById(int id);
-
-    @Query("SELECT * FROM course_table wHERE dets=:details")
-    Course getCourseByDetails(String details);
 
 //    @Query("SELECT * FROM course_table WHERE username =:username")
 //    ArrayList<Course>() getCourseByUsername(String username);
@@ -62,8 +60,4 @@ public interface CourseDAO {
 
     @Query("UPDATE course_table SET eDate=:updateEDate WHERE instructor=:instructor")
     void updateEDate(String instructor, String updateEDate);
-
-    @Query("UPDATE course_table SET dets=:updatedDetails WHERE dets=:details")
-    void updateDetails(int details, String updatedDetails);
-
 }
