@@ -56,13 +56,13 @@ public class AssignmentDisplayActivity extends AppCompatActivity {
         mCourseDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).courseDao();
         mCourse = mCourseDAO.getCourse(mCourseTitle);
 
-        displayUsername.setText("Hello " + " " + mUser.getFName() + ", showing assignments for ");
+        displayUsername.setText("Hello " + " " + mUser.getFName() + ", showing assignments for " + mCourseTitle + ".");
 
         mAssignmentDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).assignmentDao();
         List<Assignment> dbAssignments = mAssignmentDAO.getAllAssignments();
         if (dbAssignments.size() > 0) {
             for (int i = 0; i < dbAssignments.size(); i++) {
-                if (dbAssignments.get(i).getUsername().equals(mUsername)) {
+                if (dbAssignments.get(i).getUsername().equals(mUsername) && dbAssignments.get(i).getCourse().equals(mCourseTitle)) {
                     assignments.add(Double.valueOf(dbAssignments.get(i).getEarnedScore())/Double.valueOf(dbAssignments.get(i).getMaxScore()));
                 }
             }
@@ -77,6 +77,7 @@ public class AssignmentDisplayActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), AddAssignmentActivity.class);
                 i.putExtra("username", mUsername);
+                i.putExtra("course title",mCourseTitle);
                 startActivityForResult(i, EDIT_TEXT_CODE);
             }
         });
@@ -102,7 +103,17 @@ public class AssignmentDisplayActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
             Bundle bundle = data.getExtras();
-            assignments.add(bundle.getDouble(KEY_COURSE_TEXT));
+//            assignments.add(bundle.getDouble(KEY_COURSE_TEXT));
+            assignments.clear();
+            mAssignmentDAO = UserDB.getUserDAO(AssignmentDisplayActivity.this).assignmentDao();
+            List<Assignment> dbAssignments = mAssignmentDAO.getAllAssignments();
+            if (dbAssignments.size() > 0) {
+                for (int i = 0; i < dbAssignments.size(); i++) {
+                    if (dbAssignments.get(i).getUsername().equals(mUsername)) {
+                        assignments.add(Double.valueOf(dbAssignments.get(i).getEarnedScore())/Double.valueOf(dbAssignments.get(i).getMaxScore()));
+                    }
+                }
+            }
             assignmentAdapter.notifyDataSetChanged();
         } else {
             Log.w("CourseDisplay", "Error updating rv");
