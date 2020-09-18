@@ -35,7 +35,7 @@ public class CourseDisplay extends AppCompatActivity {
     CourseDAO mCourseDAO;
     User mUser;
 
-    public static final String test = "ALL_GOOD";
+//    public static final String test = "ALL_GOOD";
 
     String method;
 
@@ -81,9 +81,30 @@ public class CourseDisplay extends AppCompatActivity {
             }
         });
 
-        courseAdapter = new CourseAdapter(courses);
+        CourseAdapter.OnClickListener onClickListener = new CourseAdapter.OnClickListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Intent intent = new Intent(CourseDisplay.this, AssignmentDisplayActivity.class);
+                intent.putExtra("course title", courses.get(position));
+                intent.putExtra("username", mUsername);
+                startActivity(intent);
+            }
+        };
+
+        CourseAdapter.OnLongClickListener onLongClickListener = new CourseAdapter.OnLongClickListener(){
+            @Override
+            public void onItemLongClicked(int position) {
+                Intent intent = new Intent(CourseDisplay.this, CourseEditActivity.class);
+                intent.putExtra("course title", courses.get(position));
+                intent.putExtra("username", mUsername);
+                startActivityForResult(intent,EDIT_TEXT_CODE);
+            }
+        };
+
+        courseAdapter = new CourseAdapter(courses,onLongClickListener, onClickListener);
         rvCourses.setAdapter(courseAdapter);
         rvCourses.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
