@@ -1,13 +1,18 @@
 package com.example.cst438_project1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,7 @@ public class CourseDisplay extends AppCompatActivity {
     public static final String KEY_COURSE_POSITION = "course_position";
     public static final int EDIT_TEXT_CODE = 20;
 
-    List<String> courses;
+    List<String> courses = new ArrayList<>();
     Button btnAdd;
     EditText etCourse;
     RecyclerView rvCourses;
@@ -27,7 +32,12 @@ public class CourseDisplay extends AppCompatActivity {
     TextView displayUsername;
     Button editUser;
     UserDAO mUserDAO;
+    CourseDAO mCourseDAO;
     User mUser;
+
+    public static final String test = "ALL_GOOD";
+
+    String method;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +50,6 @@ public class CourseDisplay extends AppCompatActivity {
         displayUsername = findViewById(R.id.displayUsername);
         editUser = findViewById(R.id.editUser);
 
-        etCourse.setText("Add Course Here");
-
         Bundle extras = getIntent().getExtras();
         mUsername = extras.getString("username");
 
@@ -50,12 +58,43 @@ public class CourseDisplay extends AppCompatActivity {
 
         displayUsername.setText("Hello " + " " + mUser.getFName() + "!");
 
-        courses = new ArrayList<>();
-        courses.add("Example Course 1");
-        courses.add("Example Course 2");
+        mCourseDAO = UserDB.getUserDAO(CourseDisplay.this).courseDao();
+        List<Course> dbCourses = mCourseDAO.getAllCourses();
+        if (dbCourses.size() > 0) {
+            for (int i = 0; i < dbCourses.size(); i++) {
+                if (dbCourses.get(i).getUsername() == mUsername) {
+                    courses.add(dbCourses.get(i).getTitle());
+                }
+            }
+        }else{
+            courses.add("Example Course 1");
+        }
 
-        CourseAdapter courseAdapter = new CourseAdapter(courses);
+
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), AddCourseActivity.class);
+                i.putExtra("username", mUsername);
+                startActivityForResult(i, EDIT_TEXT_CODE);
+            }
+        });
+
+        courseAdapter = new CourseAdapter(courses);
         rvCourses.setAdapter(courseAdapter);
         rvCourses.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
+            Bundle bundle = data.getExtras();
+            courses.add(bundle.getString(KEY_COURSE_TEXT));
+            courseAdapter.notifyDataSetChanged();
+        } else {
+            Log.w("CourseDisplay", "Error updating rv");
+        }
     }
 }

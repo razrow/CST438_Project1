@@ -10,8 +10,6 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     private int courseID;
 
-    private String dets;
-
     private String instructor;
 
     private String title;
@@ -32,13 +30,12 @@ public class Course {
      * @param sDate - String - the start date of the course
      * @param eDate - String - the end date of the course
      */
-    public Course(String dets, String instructor, String title, String description, String sDate, String eDate, String username) {
+    public Course(String instructor, String title, String description, String sDate, String eDate, String username) {
         this.instructor = instructor;
         this.title = title;
         this.description = description;
         this.sDate = sDate;
         this.eDate = eDate;
-        this.dets = dets;
         this.username = username;
     }
 
@@ -68,10 +65,6 @@ public class Course {
 
     public String getEDate() {
         return eDate;
-    }
-
-    public String getDets(){
-        return dets;
     }
 
     public String getUsername(){return username; }

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccount">
+    tools:context=".AddCourseActivity">
 
     <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/usernameLabel"
+        android:text="Description"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.399" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/etStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.593" />
 
     <EditText
-        android:id="@+id/passwordReEnterEditText"
+        android:id="@+id/etEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -49,20 +49,20 @@
         android:id="@+id/passwordReEntrytextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/passwordReEnterLabel"
+        android:text="End Date"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.669" />
 
     <TextView
         android:id="@+id/passwordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/passwordLabel"
+        android:text="Start Date"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
         android:id="@+id/firstNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/firstNameLabel"
+        android:text="Instructor"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
         android:id="@+id/lastNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lastNameLabel"
+        android:text="Course Title"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +111,7 @@
         app:layout_constraintVertical_bias="0.172" />
 
     <EditText
-        android:id="@+id/lastNameEditText"
+        android:id="@+id/etCourseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -124,7 +124,7 @@
         app:layout_constraintVertical_bias="0.314" />
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/etDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -137,10 +137,10 @@
         app:layout_constraintVertical_bias="0.453" />
 
     <Button
-        android:id="@+id/createAccountButton"
+        android:id="@+id/createCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/createAccountLabel"
+        android:text="Create Course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

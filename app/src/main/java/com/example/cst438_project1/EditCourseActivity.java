@@ -54,7 +54,6 @@ public class EditCourseActivity extends AppCompatActivity {
         Course currentCourse = courseDAO.getCourseById(courseId);
 
         editCourseTextView.setText("Editing Course #" + courseId);
-        editDetailEditText.setText(currentCourse.getDets());
         editTitleEditText.setText(currentCourse.getTitle());
         editDescriptionEditText.setText(currentCourse.getDescription());
         editInstructorEditText.setText(currentCourse.getInstructor());
