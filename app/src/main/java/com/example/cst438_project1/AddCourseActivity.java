@@ -57,16 +57,22 @@ public class AddCourseActivity extends AppCompatActivity {
                         endDate.isEmpty()) {
                     showEmptyFieldErrorDialog();
                 }else{
-                    Course course = new Course(courseInstructor,courseTitle,courseDescr,startDate,endDate,mUsername);
-                    mCourseDAO.insert(course);
-                    //create intent
-                    Intent i = new Intent(getApplicationContext(), CourseDisplay.class);
-                    i.putExtra("username", mUsername);
-                    i.putExtra(CourseDisplay.KEY_COURSE_TEXT,course.getTitle());
-                    //set result of intent
-                    setResult(RESULT_OK,i);
-                    Toast.makeText(getApplicationContext(), "Course " + courseTitle + " added.",Toast.LENGTH_SHORT).show();
-                    finish();
+                    // Check to see if user name is in the database
+                    Course newCourse = mCourseDAO.getCourse(courseTitle);
+                    if (newCourse == null) {
+                        Course course = new Course(courseInstructor, courseTitle, courseDescr, startDate, endDate, mUsername);
+                        mCourseDAO.insert(course);
+                        //create intent
+                        Intent i = new Intent(getApplicationContext(), CourseDisplay.class);
+                        i.putExtra("username", mUsername);
+                        i.putExtra(CourseDisplay.KEY_COURSE_TEXT, course.getTitle());
+                        //set result of intent
+                        setResult(RESULT_OK, i);
+                        Toast.makeText(getApplicationContext(), "Course " + courseTitle + " added.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Course already exists.",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
