@@ -60,7 +60,7 @@ public class DisplayUser extends AppCompatActivity {
     public void checkForCourses(){
         List<Course> courses = mCourseDAO.getAllCourses();
         if(courses.size() <= 0){
-            Course course = new Course("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder");
+            Course course = new Course("Placeholder","Placeholder","Placeholder","Placeholder","Placeholder","Placeholder");
             mCourseDAO.insert(course);
         }
     }

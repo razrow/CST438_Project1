@@ -11,12 +11,12 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class, Grade.class, Enrollment.class, Course.class, Category.class, Assignment.class}, version = 3 )
+@Database(entities = {User.class, Grade.class, Enrollment.class, Course.class, Category.class, Assignment.class}, version = 5 )
 //@TypeConverters(DataTypeConverter.class)
 public abstract class UserDB extends RoomDatabase {
 
     public static final String DB_NAME = "user_db";
-    public static final String COURSES_TABLE = "courses_db";
+    public static final String COURSES_TABLE = "course_table";
     private static UserDB instance;
 
     public abstract UserDAO userDao();
@@ -69,7 +69,7 @@ public abstract class UserDB extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
-            courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
+            courseDao.insert(new Course("Jairo", "Capoeira Class",
                                         "Sexy Dance Fighting", "01/01/01", "03/01/01","Tina1"));
             assignmentDao.insert(new Assignment("Read 500 books", 100, 100,"Tina1","Capoeira Class"));
             return null;

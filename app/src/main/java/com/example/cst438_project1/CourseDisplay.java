@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +29,10 @@ public class CourseDisplay extends AppCompatActivity {
     TextView displayUsername;
     Button editUser;
     UserDAO mUserDAO;
+    CourseDAO mCourseDAO;
     User mUser;
+
+    String method;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,6 @@ public class CourseDisplay extends AppCompatActivity {
         displayUsername = findViewById(R.id.displayUsername);
         editUser = findViewById(R.id.editUser);
 
-        etCourse.setText("Add Course Here");
-
         Bundle extras = getIntent().getExtras();
         mUsername = extras.getString("username");
 
@@ -50,9 +53,29 @@ public class CourseDisplay extends AppCompatActivity {
 
         displayUsername.setText("Hello " + " " + mUser.getFName() + "!");
 
+        mCourseDAO = UserDB.getUserDAO(CourseDisplay.this).courseDao();
+        List<Course> dbCourses = mCourseDAO.getAllCourses();
         courses = new ArrayList<>();
-        courses.add("Example Course 1");
-        courses.add("Example Course 2");
+        if(dbCourses.size() > 0){
+            for(int i = 0; i < dbCourses.size(); i++){
+                if(dbCourses.get(i).getUsername() == mUsername){
+                    courses.add(dbCourses.get(i).getTitle());
+                }
+            }
+        }
+
+        //random stuff ppleaser ignro thank you
+//        courses.add("Example Course 1");
+//        courses.add("Example Course 2");
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), AddCourseActivity.class);
+                i.putExtra("username", mUsername);
+                startActivity(i);
+            }
+        });
 
         CourseAdapter courseAdapter = new CourseAdapter(courses);
         rvCourses.setAdapter(courseAdapter);

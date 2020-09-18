@@ -1,13 +1,11 @@
 package com.example.cst438_project1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +31,7 @@ public class CreateAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         // Initialize variables
-        firstNameEditText = findViewById(R.id.firstNameEditText);
+        firstNameEditText = findViewById(R.id.etInstructor);
         lastNameEditText = findViewById(R.id.lastNameEditText);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
