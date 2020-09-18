@@ -59,11 +59,14 @@ public class AddCourseActivity extends AppCompatActivity {
                 }else{
                     Course course = new Course(courseInstructor,courseTitle,courseDescr,startDate,endDate,mUsername);
                     mCourseDAO.insert(course);
+                    //create intent
                     Intent i = new Intent(getApplicationContext(), CourseDisplay.class);
                     i.putExtra("username", mUsername);
-//                    i.putExtra(CourseDisplay.KEY_COURSE_TEXT, )
-                    startActivity(i);
+                    i.putExtra(CourseDisplay.KEY_COURSE_TEXT,course.getTitle());
+                    //set result of intent
+                    setResult(RESULT_OK,i);
                     Toast.makeText(getApplicationContext(), "Course " + courseTitle + " added.",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });
