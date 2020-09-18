@@ -51,7 +51,7 @@ public class CourseTest {
     public void testInsertDb() {
         courseDao.deleteAllCourses();
         Course insertCourse = new Course(EXPECTED_DETS, EXPECTED_INSTRUCTOR, EXPECTED_TITLE, EXPECTED_DESCRIPTION,
-                            EXPECTED_S_DATE, EXPECTED_E_DATE);
+                            EXPECTED_S_DATE, EXPECTED_E_DATE, EXPECTED_DESCRIPTION);
         courseDao.insert(insertCourse);
         Course testCourse = courseDao.getCourse(EXPECTED_TITLE);
 

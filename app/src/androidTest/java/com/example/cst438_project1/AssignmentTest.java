@@ -21,6 +21,8 @@ public class AssignmentTest {
     private static final String EXPECTED_DETS = "Create a hello world project";
     private static final int EXPECTED_MAX_SCORE = 50;
     private static final int EXPECTED_EARNED_SCORE = 40;
+    private static final String EXPECTED_USERNAME = "Tina1";
+    private static final String EXPECTED_COURSE = "CS";
     private static final String EXPECTED_ASSIGNED_DATE = "01/01/01";
     private static final String EXPECTED_DUE_DATE = "02/02/02";
     private static final int EXPECTED_CATEGORY_ID = 1;
@@ -29,6 +31,8 @@ public class AssignmentTest {
     private static final String UPDATED_DETS = "Create a hello world project in java";
     private static final int UPDATED_MAX_SCORE = 100;
     private static final int UPDATED_EARNED_SCORE = 100;
+    private static final String UPDATED_USERNAME = "Tina2";
+    private static final String UPDATED_COURSE = "Computer Science";
     private static final String UPDATED_ASSIGNED_DATE = "02/02/02";
     private static final String UPDATED_DUE_DATE = "03/03/03";
     private static final int UPDATED_CATEGORY_ID = 2;
@@ -39,20 +43,22 @@ public class AssignmentTest {
     /**
      * Creates the database at the beginning of the test run.
      */
-    @Before
+    /*@Before
     public void createDb(){
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
-    }
+    }*/
 
     /**
      * Tests inserting an object into the database
      */
     @Test
     public void testInsertAssignment() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
         assignmentDao.deleteAllAssignment();
         Assignment insertAssignment = new Assignment(EXPECTED_DETS, EXPECTED_MAX_SCORE,
-                                                                            EXPECTED_EARNED_SCORE);
+                EXPECTED_EARNED_SCORE,EXPECTED_USERNAME, EXPECTED_COURSE );
         assignmentDao.insert(insertAssignment);
         Assignment testAssignment = assignmentDao.getAssignmentByDetails(EXPECTED_DETS);
 
@@ -65,6 +71,8 @@ public class AssignmentTest {
      */
     @Test
     public void testGetAssignmentFromDb() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
         Assignment assignment = assignmentDao.getAssignmentByDetails(EXPECTED_DETS);
 
         assertEquals("Expected getAssignement does not match actual",
@@ -80,6 +88,9 @@ public class AssignmentTest {
      */
     @Test
     public void testSetMaxScore() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
+
         assignmentDao.updateMaxScore(EXPECTED_DETS, UPDATED_MAX_SCORE);
         Assignment assignment = assignmentDao.getAssignmentByDetails(EXPECTED_DETS);
         assertEquals("Expected setMaxScore does not match actual",
@@ -93,8 +104,17 @@ public class AssignmentTest {
      */
     @Test
     public void testSetEarnedScore() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
+
+        Assignment insertAssignment = new Assignment(EXPECTED_DETS, EXPECTED_MAX_SCORE,
+                EXPECTED_EARNED_SCORE,EXPECTED_USERNAME, EXPECTED_COURSE );
+        assignmentDao.insert(insertAssignment);
+
         assignmentDao.updateEarnedScore(EXPECTED_DETS, UPDATED_EARNED_SCORE);
+
         Assignment assignment = assignmentDao.getAssignmentByDetails(EXPECTED_DETS);
+
         assertEquals("Expected setEarnedScore does not match actual",
                                                 UPDATED_EARNED_SCORE, assignment.getEarnedScore());
         // setting back to original
@@ -107,6 +127,9 @@ public class AssignmentTest {
      * AssignmentDao.
      */
     public void testSetDetails() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
+
         assignmentDao.updateDetails(EXPECTED_DETS, UPDATED_DETS);
         Assignment assignment = assignmentDao.getAssignmentByDetails(UPDATED_DETS);
         assertEquals("Expected setDetails does not match actual",
@@ -120,6 +143,8 @@ public class AssignmentTest {
      */
     @Test
     public void testDeleteAssignment() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assignmentDao = UserDB.getUserDAO(appContext).assignmentDao();
         assignmentDao.delete(assignmentDao.getAssignmentByDetails(EXPECTED_DETS));
         Assignment assignment = assignmentDao.getAssignmentByDetails(EXPECTED_DETS);
         assertNull(assignment);

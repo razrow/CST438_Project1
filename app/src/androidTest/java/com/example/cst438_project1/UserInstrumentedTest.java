@@ -35,17 +35,19 @@ public class UserInstrumentedTest {
     /**
      * Creates the database at the beginning of the test run.
      */
-    @Before
+    /*@Before
     public void createDb(){
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
         userDao = UserDB.getUserDAO(appContext).userDao();
 
-    }
+    }*/
     /**
      * Tests inserting an object into the database
      */
     @Test
     public void testInsertDb(){
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         userDao.deleteAllUsers();
         User insertUser = new User(EXPECTED_USERNAME, EXPECTED_PASSWORD,
                                     EXPECTED_FIRST_NAME, EXPECTED_LAST_NAME);
@@ -60,6 +62,8 @@ public class UserInstrumentedTest {
      */
     @Test
     public void testGetUserFromDb(){
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         User user = userDao.getUsername(EXPECTED_USERNAME);
 
         assertEquals("Expected testGetUserFromDb does not match actual",
@@ -78,6 +82,8 @@ public class UserInstrumentedTest {
      */
     @Test
     public void testSetFirstName() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         userDao.updateFirstName(EXPECTED_USERNAME, UPDATED_FIRST_NAME);
         User user = userDao.getUsername(EXPECTED_USERNAME);
         assertEquals("Expected testSetUserFirstName does not match actual",
@@ -92,6 +98,8 @@ public class UserInstrumentedTest {
      */
     @Test
     public void testSetLastName() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         userDao.updateLastName(EXPECTED_USERNAME, UPDATED_LAST_NAME);
         User user = userDao.getUsername(EXPECTED_USERNAME);
         assertEquals("Expected testSetUserLastName does not match actual",
@@ -106,6 +114,8 @@ public class UserInstrumentedTest {
      */
     @Test
     public void testSetPassword() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         userDao.updatePassword(EXPECTED_USERNAME, UPDATED_PASSWORD);
         User user = userDao.getUsername(EXPECTED_USERNAME);
         assertEquals("Expected testSetUserPassword does not match actual",
@@ -119,6 +129,8 @@ public class UserInstrumentedTest {
      */
     @Test
     public  void testDeleteUser() {
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();;
+        userDao = UserDB.getUserDAO(appContext).userDao();
         userDao.delete(userDao.getUsername(EXPECTED_USERNAME));
         User user = userDao.getUsername(EXPECTED_USERNAME);
         assertNull(user);
