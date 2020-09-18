@@ -64,15 +64,23 @@ public abstract class UserDB extends RoomDatabase {
             userDao = db.userDao();
             courseDao = db.courseDao();
             assignmentDao = db.assignmentDao();
+
+            // Pre-populate data maybe
+            userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
+            courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
+                    "Sexy Dance Fighting", "01/01/01", "03/01/01","Tina1"));
+            assignmentDao.insert(new Assignment("Read 500 books", 100, 100,"Tina1","Capoeira Class"));
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
-            courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
-                                        "Sexy Dance Fighting", "01/01/01", "03/01/01","Tina1"));
-            assignmentDao.insert(new Assignment("Read 500 books", 100, 100,"Tina1","Capoeira Class"));
+            //userDao.insert(new User("Tina1", "boyz123", "Tina", "Belcher"));
+            //courseDao.insert(new Course("Placeholder","Jairo", "Capoeira Class",
+            //                            "Sexy Dance Fighting", "01/01/01", "03/01/01","Tina1"));
+            //assignmentDao.insert(new Assignment("Read 500 books", 100, 100,"Tina1","Capoeira Class"));
             return null;
         }
     }
+
+
 }

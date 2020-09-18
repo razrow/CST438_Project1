@@ -26,9 +26,7 @@ public class EditUserActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button saveButton;
 
-    private String updateFirstName;
-    private String updatedLastName;
-    private String updatedPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class EditUserActivity extends AppCompatActivity {
 
         // Database context
         userDao = UserDB.getUserDAO(EditUserActivity.this).userDao();
-        final String username = getIntent().getStringExtra("USERNAME");
+        final String username = getIntent().getStringExtra("username");
         User currentUser = userDao.getUsername(username);
 
         // Set fields up for editing
@@ -63,6 +61,15 @@ public class EditUserActivity extends AppCompatActivity {
                 userDao.updateFirstName(username, updatedFirstName);
                 userDao.updateLastName(username, updatedLastName);
                 userDao.updatePassword(username, updatedPassword);
+
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent editUserIntent = new Intent(getApplicationContext(), EditUserActivity.class);
+                        editUserIntent.putExtra("username", username);
+                        startActivity(editUserIntent);
+                    }
+                });
 
             }
         });
