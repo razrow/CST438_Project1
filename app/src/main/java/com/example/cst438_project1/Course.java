@@ -31,6 +31,7 @@ public class Course {
      * @param description - String - a description of the course
      * @param sDate - String - the start date of the course
      * @param eDate - String - the end date of the course
+     * @param username - the username that is associated with the course
      */
     public Course(String dets, String instructor, String title, String description, String sDate, String eDate, String username) {
         this.instructor = instructor;
