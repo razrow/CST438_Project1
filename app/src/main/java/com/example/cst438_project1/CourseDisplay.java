@@ -100,6 +100,15 @@ public class CourseDisplay extends AppCompatActivity {
         rvCourses.setAdapter(courseAdapter);
         rvCourses.setLayoutManager(new LinearLayoutManager(this));
 
+
+        editUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent editUserIntent = new Intent(getApplicationContext(), EditUserActivity.class);
+                editUserIntent.putExtra("username", mUsername);
+                startActivity(editUserIntent);
+            }
+        });
     }
 
     @Override
