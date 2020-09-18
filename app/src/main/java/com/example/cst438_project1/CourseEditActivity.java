@@ -67,7 +67,8 @@ public class CourseEditActivity extends AppCompatActivity {
                     showEmptyFieldErrorDialog();
                 }else{
                     Course course = new Course(courseInstructor,courseTitle,courseDescr,startDate,endDate,mUsername);
-                    mCourseDAO.update(course);
+                    mCourseDAO.delete(mCourse);
+                    mCourseDAO.insert(course);
                     //create intent
                     Intent i = new Intent(getApplicationContext(), CourseDisplay.class);
                     i.putExtra("username", mUsername);

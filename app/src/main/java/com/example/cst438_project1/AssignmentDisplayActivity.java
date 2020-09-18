@@ -62,7 +62,7 @@ public class AssignmentDisplayActivity extends AppCompatActivity {
         List<Assignment> dbAssignments = mAssignmentDAO.getAllAssignments();
         if (dbAssignments.size() > 0) {
             for (int i = 0; i < dbAssignments.size(); i++) {
-                if (dbAssignments.get(i).getUsername() == mUsername) {
+                if (dbAssignments.get(i).getUsername().equals(mUsername)) {
                     assignments.add(Double.valueOf(dbAssignments.get(i).getEarnedScore())/Double.valueOf(dbAssignments.get(i).getMaxScore()));
                 }
             }

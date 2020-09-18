@@ -24,6 +24,7 @@ public class CourseDisplay extends AppCompatActivity {
     public static final int EDIT_TEXT_CODE = 20;
 
     List<String> courses = new ArrayList<>();
+    List<Course> dbCourses;
     Button btnAdd;
     RecyclerView rvCourses;
     CourseAdapter courseAdapter;
@@ -56,7 +57,7 @@ public class CourseDisplay extends AppCompatActivity {
         List<Course> dbCourses = mCourseDAO.getAllCourses();
         if (dbCourses.size() > 0) {
             for (int i = 0; i < dbCourses.size(); i++) {
-                if (dbCourses.get(i).getUsername() == mUsername) {
+                if (dbCourses.get(i).getUsername().equals(mUsername)) {
                     courses.add(dbCourses.get(i).getTitle());
                 }
             }
@@ -105,8 +106,17 @@ public class CourseDisplay extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == EDIT_TEXT_CODE) {
-            Bundle bundle = data.getExtras();
-            courses.add(bundle.getString(KEY_COURSE_TEXT));
+//            Bundle bundle = data.getExtras();
+//            courses.add(bundle.getString(KEY_COURSE_TEXT));
+            courses.clear();
+            List<Course> dbCourses = mCourseDAO.getAllCourses();
+            if (dbCourses.size() > 0) {
+                for (int i = 0; i < dbCourses.size(); i++) {
+                    if (dbCourses.get(i).getUsername().equals(mUsername)) {
+                        courses.add(dbCourses.get(i).getTitle());
+                    }
+                }
+            }
             courseAdapter.notifyDataSetChanged();
         } else {
             Log.w("CourseDisplay", "Error updating rv");
